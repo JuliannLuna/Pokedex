@@ -1,0 +1,26 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Lista de Pokemones",
+  "homepage": "https://github.com/JuliannLuna/Pokedex#readme",
+  "bugs": {
+    "url": "https://github.com/JuliannLuna/Pokedex/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuliannLuna/Pokedex.git"
+  },
+  "license": "ISC",
+  "author": "Julian",
+  "type": "commonjs",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^4.0.0"
+  },
+  "dependencies": {
+    "jquery": "^4.0.0"
+  }
+}
