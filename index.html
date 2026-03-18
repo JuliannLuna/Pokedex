@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedéx</title>
+    <link rel="stylesheet" href="src/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="font-mono bg-[#081215] text-(--color-secundario)">
+    <header></header>
+    <main class="px-10 py-5">
+      <h1 class="text-4xl text-(--color-principal) text-center mb-5 font-bold">
+        Pokedéx
+      </h1>
+      <ul id="lista-pokemones" class="grid grid-cols-5 gap-4 mb-5"></ul>
+      <div class="flex justify-between text-(--color-principal) font-bold">
+        <button id="atras" class="bg-(--color-secundario)/50 p-2.5 rounded-xl">
+          ATRAS
+        </button>
+        <button
+          id="siguiente"
+          class="bg-(--color-secundario) p-2.5 rounded-xl cursor-pointer"
+        >
+          SIGUIENTE
+        </button>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="src/index.js"></script>
+</html>
