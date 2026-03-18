@@ -7,7 +7,6 @@ li {
   background-color: var(--color-principal);
   margin: 10px 0 10px;
   text-align: center;
-  text-transform: uppercase;
   font-weight: bold;
   border-radius: 0.5rem;
   place-items: center;
