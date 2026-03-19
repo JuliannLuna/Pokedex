@@ -28,24 +28,33 @@ function mostrarPokemonesDeAPI(url) {
             .then((jsonPokemon) => {
               $("ul").append(
                 $(
-                  `<li class="h-96 content-center">
-                    <img class="h-40" src="${jsonPokemon.sprites.other.home.front_default}" alt="${miJson.results[pokemon].name}">
-                    <h2 class="text-3xl uppercase mb-4">${miJson.results[pokemon].name}</h2>
-                    <div class="grid grid-cols-[140px_1fr] gap-2 items-center text-lg">
+                  `<li class="h-full tarjeta">
+                    <img class="h-40 mx-auto" src="${jsonPokemon.sprites.other.home.front_default}" alt="${miJson.results[pokemon].name}">
+                    <h2 class="text-3xl uppercase mb-4 text-center">${miJson.results[pokemon].name}</h2>
+                    <div class="grid gap-2 items-center text-center text-lg">
   
-                      <span class="p-1/2 rounded-full text-center text-(--color-principal) bg-(--color-secundario)">Habilidad</span>
-                      <span class="capitalize text-left font-bold text-(--color-secundario)">${jsonPokemon.abilities[0].ability.name}</span>
+                      <span class="p-1/2 text-(--color-principal) bg-(--color-secundario)">Habilidades</span>
+                      <ol id="habilidades-${miJson.results[pokemon].name}" class="capitalize list-disc list-inside w-fit mx-auto text-left font-bold text-(--color-secundario)"></ol>
 
-                      <span class="p-1/2 rounded-full text-center text-(--color-principal) bg-(--color-secundario)">Especie</span>
-                      <span class="capitalize text-left font-bold text-(--color-secundario)">${jsonPokemon.species.name}</span>
+                      <span class="p-1/2 text-(--color-principal) bg-(--color-secundario)">Especie</span>
+                      <span class="capitalize font-bold text-(--color-secundario)">${jsonPokemon.species.name}</span>
 
-                      <span class="p-1/2 rounded-full text-center text-(--color-principal) bg-(--color-secundario)">Peso</span>
-                      <span class="text-left font-bold text-(--color-secundario)">${Number(jsonPokemon.weight) / 10} kg.</span>
+                      <span class="p-1/2 text-(--color-principal) bg-(--color-secundario)">Peso</span>
+                      <span class="font-bold text-(--color-secundario)">${Number(jsonPokemon.weight) / 10} kg.</span>
 
                     </div>
                    </li>`,
                 ),
               );
+              Object.keys(jsonPokemon.abilities).forEach((habilidad) => {
+                $(`#habilidades-${miJson.results[pokemon].name}`).append(
+                  $(
+                    `
+                      <li>${jsonPokemon.abilities[habilidad].ability.name}</li>
+                     `,
+                  ),
+                );
+              });
             })
             .catch((error) => console.error("FALLO", error));
         });
@@ -68,57 +77,6 @@ botonAtras.onclick = () => {
 // la cual es que la variable siguienteURL sea diferente de null
 botonSiguiente.onclick = () => {
   mostrarPokemonesDeAPI(siguienteURL);
-};
-
-function botonSiguienteAtras(url) {
-  if (url) {
-    $("ul").html("");
-    fetch(url)
-      .then((respuesta) => respuesta.json())
-      .then((miJson) => {
-        siguienteURL = miJson.next;
-        anteriorURL = miJson.previous;
-
-        modificarBotonSiguiente(miJson);
-        modificarBotonAtras(miJson);
-
-        Object.keys(miJson.results).forEach((pokemon) => {
-          fetch(
-            `https://pokeapi.co/api/v2/pokemon/${miJson.results[pokemon].name}`,
-          )
-            .then((res) => res.json())
-            .then((jsonPokemon) => {
-              $("ul").append(
-                $(
-                  `<li>
-                    <img class="h-30" src="${jsonPokemon.sprites.front_default}" alt="${miJson.results[pokemon].name}">
-                    <h2 class="text-xl mb-4">${miJson.results[pokemon].name}</h2>
-                    <p>Habilidad:
-                    ${jsonPokemon.abilities[0].ability.name}
-                    </p>
-                    <p>Especie: ${jsonPokemon.species.name}</p>
-                    <p>Peso: ${jsonPokemon.weight}</p>
-                   </li>`,
-                ),
-              );
-            })
-            .catch((error) => console.error("FALLO", error));
-        });
-      })
-      .catch((error) => console.error("FALLÓ", error));
-  }
-}
-
-//   Cada vez que se presione el boton Atras y este cumpla con las condiciones
-// la cual es que la variable anteriorURL sea diferente de null
-botonAtras.onclick = () => {
-  botonSiguienteAtras(anteriorURL);
-};
-
-//   Cada vez que se presione el boton Siguiente y este cumpla con las condiciones
-// la cual es que la variable siguienteURL sea diferente de null
-botonSiguiente.onclick = () => {
-  botonSiguienteAtras(siguienteURL);
 };
 
 //   Esta funcion se encarga de ver si el objeto donde estan los pokemones tienen
