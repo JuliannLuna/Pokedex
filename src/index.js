@@ -26,31 +26,54 @@ function mostrarPokemonesDeAPI(url) {
           )
             .then((res) => res.json())
             .then((jsonPokemon) => {
+              const idPokemon = jsonPokemon.id;
+              const idPokemonFormateado = idPokemon.toString().padStart(3, "0");
+
+              let tiposHTML = "";
+              jsonPokemon.types.forEach((tipo) => {
+                tiposHTML += `<span class="p-1 rounded-full capitalize text-(--texto-${tipo.type.name}) bg-(--texto-${tipo.type.name})/25">
+                                ${tipo.type.name}
+                              </span>`;
+              });
+
               $("ul").append(
                 $(
-                  `<li class="h-full tarjeta">
-                    <img class="h-40 mx-auto" src="${jsonPokemon.sprites.other.home.front_default}" alt="${miJson.results[pokemon].name}">
-                    <h2 class="text-3xl uppercase mb-4 text-center">${miJson.results[pokemon].name}</h2>
-                    <div class="grid gap-2 items-center text-center text-lg">
-  
-                      <span class="p-1/2 text-(--color-principal) bg-(--color-secundario)">Habilidades</span>
-                      <ol id="habilidades-${miJson.results[pokemon].name}" class="capitalize list-disc list-inside w-fit mx-auto text-left font-bold text-(--color-secundario)"></ol>
+                  `<li class="h-full tarjeta px-3">
+                   <div class="flex items-center font-bold py-5">
+                    <span class="text-gray-500 text-lg">#${idPokemonFormateado}</span>
+                    <div id="tipos" class="flex flex-row-reverse gap-2 w-full">${tiposHTML}</div>
+                   </div>
+                    <div class="w-full h-46 flex justify-center items-center bg-linear-to-tr from-[#D8324E]/50 rounded mb-4">
+                      <img class="h-40" src="${jsonPokemon.sprites.other.home.front_default}" alt="${miJson.results[pokemon].name}">
+                    </div>
+                      <h2 class="text-3xl font-bold uppercase mb-3 ">${miJson.results[pokemon].name}</h2>
+                    <div class="space-y-2 border-t border-white/5 pt-3">
+                    <div>
 
-                      <span class="p-1/2 text-(--color-principal) bg-(--color-secundario)">Especie</span>
-                      <span class="capitalize font-bold text-(--color-secundario)">${jsonPokemon.species.name}</span>
+                      <div class="mb-3">
+                        <span class="p-1/2 text-lg text-gray-500 bg-(--color-secundario)">Habilidades</span>
+                        <div id="habilidades-${miJson.results[pokemon].name}" class="grid gap-2 grid-flow-col capitalize text-[#D8324E] text-sm font-bold text-center"></div>
+                      </div>
 
-                      <span class="p-1/2 text-(--color-principal) bg-(--color-secundario)">Peso</span>
-                      <span class="font-bold text-(--color-secundario)">${Number(jsonPokemon.weight) / 10} kg.</span>
+                      <div class="mb-3 flex flex-col">
+                        <span class="p-1/2 text-lg text-gray-500 bg-(--color-secundario)">Especie</span>
+                        <span class="capitalize font-bold">${jsonPokemon.species.name}</span>
+                      </div>
 
+                      <div class="mb-3 flex flex-col">
+                        <span class="p-1/2 text-lg text-gray-500 bg-(--color-secundario)">Peso</span>
+                        <span class="font-bold">${Number(jsonPokemon.weight) / 10} kg.</span>
+                      </div
                     </div>
                    </li>`,
                 ),
               );
+
               Object.keys(jsonPokemon.abilities).forEach((habilidad) => {
                 $(`#habilidades-${miJson.results[pokemon].name}`).append(
                   $(
                     `
-                      <li>${jsonPokemon.abilities[habilidad].ability.name}</li>
+                      <span class="bg-[#2a2a2a] rounded">${jsonPokemon.abilities[habilidad].ability.name}</span>
                      `,
                   ),
                 );

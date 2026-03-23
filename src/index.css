@@ -1,12 +1,46 @@
 :root {
-  --color-principal: #0052cc;
-  --color-secundario: #ffd6c0;
+  /* --color-principal: #0052cc;
+  --color-secundario: #ffd6c0; */
+  --color-principal: #dc0a2d;
+  --color-secundario: #212121;
+  --color-textoInfor: #353534;
+
+  /* BACKGROUND DE LAS ABILIDADES POKEMON */
+  --texto-normal: #a4acaf;
+  --texto-poison: #8904b1;
+  --texto-electric: #f4ff3f;
+  --texto-water: #9eb9d4;
+  --texto-fire: #d53e0f;
+  --texto-fairy: #bdb9b8;
+  --texto-dragon: #6e5034;
+  --texto-ground: #ab9842;
+  --texto-fairy: #fdb9e9;
+  --texto-bug: #729f3f;
+  --texto-grass: #9bcc50;
+  --texto-fighting: #d56723;
+  --texto-psychic: #f366b9;
+  --texto-rock: #a38c21;
+  --texto-steel: #9eb7b8;
+  --texto-ice: #51c4e7;
+  --texto-ghost: #7b62a3;
+  --texto-flying: #bdb9b8;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-tactical {
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .tarjeta {
-  background-color: var(--color-principal);
-  margin: 10px 0 10px;
-  font-weight: bold;
+  background-color: var(--color-secundario);
+  color: white;
+  /* margin: 10px 0 10px; */
   border-radius: 0.5rem;
-  padding: 0 0 15px;
+  align-content: center;
 }
